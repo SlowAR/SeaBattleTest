@@ -31,6 +31,8 @@ public abstract class BaseScreen implements Screen {
         skin = new Skin();
         skin.addRegions(gameAssets.uiSkinAtlas);
         skin.load(Gdx.files.internal("ui/uiskin.json"));
+
+        Gdx.input.setInputProcessor(stage);
         spriteBatch = gameAssets.spriteBatch;
 
         setupGameObjects();

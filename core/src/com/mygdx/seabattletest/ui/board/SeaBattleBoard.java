@@ -34,6 +34,5 @@ public class SeaBattleBoard extends BaseLogic<SeaBattleBoardContract.View> imple
 
     @Override
     public void onAutoButtonClick() {
-
     }
 }
