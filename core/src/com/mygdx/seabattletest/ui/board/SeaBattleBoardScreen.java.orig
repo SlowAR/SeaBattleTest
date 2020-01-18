@@ -7,10 +7,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.seabattletest.common.BaseScreen;
 import com.mygdx.seabattletest.common.Constants;
 import com.mygdx.seabattletest.objects.BoardActor;
+<<<<<<< HEAD
+=======
+import com.mygdx.seabattletest.objects.MaskActor;
+>>>>>>> feature/mask
 import com.mygdx.seabattletest.objects.ship.ShipActor;
 import com.mygdx.seabattletest.objects.ship.ShipData;
-import com.mygdx.seabattletest.objects.MaskActor;
-import com.mygdx.seabattletest.objects.ship.ShipActor;
 import com.mygdx.seabattletest.resources.GameAssets;
 
 import java.util.ArrayList;
@@ -27,7 +29,10 @@ public class SeaBattleBoardScreen extends BaseScreen implements SeaBattleBoardCo
     private BoardActor boardActor;
     private TextButton autoButton;
     private List<ShipActor> shipsList;
+<<<<<<< HEAD
+=======
     private Actor maskActor;
+>>>>>>> feature/mask
 
     public SeaBattleBoardScreen(GameAssets gameAssets) {
         super(gameAssets);
@@ -40,9 +45,12 @@ public class SeaBattleBoardScreen extends BaseScreen implements SeaBattleBoardCo
         super.setupGameObjects();
         boardActor = new BoardActor(gameAssets);
         stage.addActor(boardActor);
+<<<<<<< HEAD
+=======
 
         maskActor = new MaskActor(gameAssets);
         stage.addActor(maskActor);
+>>>>>>> feature/mask
     }
 
     @Override
