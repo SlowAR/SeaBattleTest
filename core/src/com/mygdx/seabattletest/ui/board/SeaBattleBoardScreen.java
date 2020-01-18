@@ -6,7 +6,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.seabattletest.common.BaseScreen;
 import com.mygdx.seabattletest.common.Constants;
 import com.mygdx.seabattletest.objects.BoardActor;
+import com.mygdx.seabattletest.objects.ship.ShipActor;
+import com.mygdx.seabattletest.objects.ship.ShipData;
 import com.mygdx.seabattletest.resources.GameAssets;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by SlowAR on 16.01.2020.
@@ -18,26 +23,42 @@ public class SeaBattleBoardScreen extends BaseScreen implements SeaBattleBoardCo
 
     private BoardActor boardActor;
     private TextButton autoButton;
+    private List<ShipActor> shipsList;
 
     public SeaBattleBoardScreen(GameAssets gameAssets) {
         super(gameAssets);
+        shipsList = new ArrayList<>();
         seaBattleBoard = new SeaBattleBoard(this).build();
-        setupUi();
     }
 
     @Override
     protected void setupGameObjects() {
         super.setupGameObjects();
         boardActor = new BoardActor(gameAssets);
-        boardActor.setPosition(Constants.BOARD_CELL_WIDTH * 2, Constants.BOARD_CELL_HEIGHT);
-        boardActor.setSize(Constants.BOARD_CELL_WIDTH * 10, Constants.BOARD_CELL_HEIGHT * 10);
         stage.addActor(boardActor);
-        boardActor.init(skin);
+    }
+
+    @Override
+    public void onBoardCreated(int cellsWidth, int cellsHeight, int shipsAmount) {
+        boardActor.setPosition(Constants.BOARD_CELL_WIDTH * 2, Constants.BOARD_CELL_HEIGHT);
+        boardActor.setSize(Constants.BOARD_CELL_WIDTH * cellsWidth, Constants.BOARD_CELL_HEIGHT * cellsHeight);
+        boardActor.init(skin, cellsWidth, cellsHeight);
+        createShips(shipsAmount);
+        setupUi();
+    }
+
+    private void createShips(int shipsAmount) {
+        for (int i = 0; i < shipsAmount; i++) {
+            ShipActor shipActor = new ShipActor();
+            shipActor.setPosition(Constants.BOARD_CELL_WIDTH, Constants.BOARD_CELL_HEIGHT);
+            stage.addActor(shipActor);
+            shipsList.add(shipActor);
+        }
     }
 
     private void setupUi() {
         autoButton = new TextButton("Auto", skin);
-        autoButton.setPosition(boardActor.getX() + boardActor.getWidth(), boardActor.getY());
+        autoButton.setPosition(boardActor.getX() + boardActor.getWidth() + Constants.BOARD_CELL_WIDTH, boardActor.getY());
         autoButton.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
@@ -49,8 +70,8 @@ public class SeaBattleBoardScreen extends BaseScreen implements SeaBattleBoardCo
     }
 
     @Override
-    public void setupBoard(int width, int height) {
-        //board actor set parameters
+    public void placeShips(List<ShipData> shipDataList) {
+
     }
 
     @Override
