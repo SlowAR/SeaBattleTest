@@ -18,6 +18,7 @@ public class GameAssets {
     public TextureAtlas uiSkinAtlas;
     public TextureRegion background;
     public TextureRegion button;
+    public TextureRegion circleMask;
 
     public GameAssets() {
         setupObjects();
@@ -32,8 +33,10 @@ public class GameAssets {
     }
 
     public void loadTexturesRegions() {
+        button = uiSkinAtlas.findRegion("button");
+
         background = textureAtlas.findRegion("background");
-        button = textureAtlas.findRegion("button");
+        circleMask = textureAtlas.findRegion("circle_mask");
     }
 
     public void dispose() {
