@@ -1,4 +1,4 @@
-package com.mygdx.seabattletest;
+package com.mygdx.seabattletest.objects;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.NinePatch;
@@ -20,6 +20,6 @@ public class BoardActor extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-
+        boardNinePatch.draw(batch, getX(), getY(), getWidth(), getHeight());
     }
 }

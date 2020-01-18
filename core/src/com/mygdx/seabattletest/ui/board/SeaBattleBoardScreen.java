@@ -1,8 +1,10 @@
 package com.mygdx.seabattletest.ui.board;
 
-import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.seabattletest.common.BaseScreen;
+import com.mygdx.seabattletest.common.Constants;
+import com.mygdx.seabattletest.objects.BoardActor;
 import com.mygdx.seabattletest.resources.GameAssets;
 
 /**
@@ -12,6 +14,8 @@ import com.mygdx.seabattletest.resources.GameAssets;
 public class SeaBattleBoardScreen extends BaseScreen implements SeaBattleBoardContract.View {
 
     private SeaBattleBoardContract.Logic seaBattleBoard;
+
+    private Actor boardActor;
     private TextButton autoButton;
 
     public SeaBattleBoardScreen(GameAssets gameAssets) {
@@ -20,9 +24,18 @@ public class SeaBattleBoardScreen extends BaseScreen implements SeaBattleBoardCo
         setupUi();
     }
 
+    @Override
+    protected void setupGameObjects() {
+        super.setupGameObjects();
+        boardActor = new BoardActor(gameAssets);
+        boardActor.setPosition(Constants.BOARD_CELL_WIDTH * 2, Constants.BOARD_CELL_HEIGHT);
+        boardActor.setSize(Constants.BOARD_CELL_WIDTH * 10, Constants.BOARD_CELL_HEIGHT * 10);
+        stage.addActor(boardActor);
+    }
+
     private void setupUi() {
         autoButton = new TextButton("Auto", skin);
-        autoButton.setPosition(100, 100);
+        autoButton.setPosition(boardActor.getX() + boardActor.getWidth(), boardActor.getY());
         stage.addActor(autoButton);
     }
 
@@ -34,9 +47,6 @@ public class SeaBattleBoardScreen extends BaseScreen implements SeaBattleBoardCo
     @Override
     public void draw() {
         super.draw();
-        spriteBatch.begin();
-        spriteBatch.draw(gameAssets.background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        spriteBatch.end();
     }
 
     @Override
