@@ -11,7 +11,6 @@ android {
             assets.srcDirs = ['assets']
             jniLibs.srcDirs = ['libs']
         }
-
     }
     packagingOptions {
         exclude 'META-INF/robovm/ios/robovm.xml'
@@ -22,6 +21,10 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
+        project.ext.set("archivesBaseName", "insane_bullet_" + defaultConfig.versionName)
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64", "mips"
+        }
     }
     buildTypes {
         release {
@@ -30,7 +33,6 @@ android {
         }
     }
 }
-
 
 // called every time gradle gets executed, takes the native dependencies of
 // the natives configuration, and extracts them to the proper libs/ folders

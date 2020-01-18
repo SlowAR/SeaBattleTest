@@ -1,0 +1,45 @@
+{
+  Color: {
+    white: { a: 1, b: 1, g: 1, r: 1 },
+    red: { a: 1, b: 0, g: 0, r: 1 },
+    black: { a: 1, b: 0, g: 0, r: 0 }
+    blue: { a: 1, b: 1, g: 0.5, r: 0.3 }
+  },
+  BitmapFont: {
+    default-font: {
+      file: fonts/sib.fnt
+    }
+  }
+  LabelStyle: {
+    default: {
+      font: default-font
+    }
+  },
+  TextButtonStyle: {
+    default: {
+      down: button,
+      up: button,
+      font: default-font,
+      fontColor: blue
+    },
+    toggle: {
+      down: button,
+      up: button,
+      checked: button,
+      font: default-font,
+      fontColor: blue,
+      downFontColor: red
+    }
+  },
+  ImageButtonStyle: {
+    default: {
+      down: button,
+      up: button
+    },
+    toggle: {
+      down: button,
+      up: button,
+      checked: button
+    }
+  }
+}
