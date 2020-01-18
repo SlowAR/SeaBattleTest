@@ -5,15 +5,15 @@ filter: Nearest,Nearest
 repeat: none
 background
   rotate: false
-  xy: 1, 59
+  xy: 1, 131
   size: 800, 593
   orig: 800, 593
   offset: 0, 0
   index: -1
-button
+circle_mask
   rotate: false
   xy: 1, 1
-  size: 56, 56
-  orig: 56, 56
+  size: 128, 128
+  orig: 128, 128
   offset: 0, 0
   index: -1
