@@ -7,9 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.seabattletest.common.BaseScreen;
 import com.mygdx.seabattletest.common.Constants;
 import com.mygdx.seabattletest.objects.BoardActor;
-import com.mygdx.seabattletest.objects.MaskActor;
 import com.mygdx.seabattletest.objects.ship.ShipActor;
 import com.mygdx.seabattletest.objects.ship.ShipData;
+import com.mygdx.seabattletest.objects.MaskActor;
+import com.mygdx.seabattletest.objects.ship.ShipActor;
 import com.mygdx.seabattletest.resources.GameAssets;
 
 import java.util.ArrayList;
