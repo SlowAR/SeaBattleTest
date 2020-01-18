@@ -24,7 +24,7 @@ public abstract class BaseScreen implements Screen {
         this.gameAssets = gameAssets;
         stage = new Stage(new ExtendViewport(800, 480));
         skin = new Skin();
-        skin.add("default-font", gameAssets.simpleFont);
+        skin.addRegions(gameAssets.uiSkinAtlas);
         skin.load(Gdx.files.internal("ui/uiskin.json"));
 
         spriteBatch = gameAssets.spriteBatch;
