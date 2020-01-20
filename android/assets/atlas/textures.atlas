@@ -17,3 +17,10 @@ circle_mask
   orig: 128, 128
   offset: 0, 0
   index: -1
+ship
+  rotate: false
+  xy: 803, 668
+  size: 56, 56
+  orig: 56, 56
+  offset: 0, 0
+  index: -1
