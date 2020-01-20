@@ -52,15 +52,25 @@ public class GameRules {
         if (getShipsAmount() == 0) {
             throw new IllegalStateException("Board cannot exist without any ship!");
         }
+
+        if (isHaveOneCellBorder) {
+            for (ShipRuleInfo shipRuleInfo : shipRuleInfos) {
+                shipRuleInfo.changeSize(shipRuleInfo.getWidthCells() + 2, shipRuleInfo.getHeightCells() + 2);
+            }
+        }
         return this;
     }
 
     public int getBoardWidth() {
-        return boardWidth;
+        return isHaveOneCellBorder ? (boardWidth + 2) : boardWidth;
     }
 
     public int getBoardHeight() {
-        return boardHeight;
+        return isHaveOneCellBorder ? (boardHeight + 2) : boardHeight;
+    }
+
+    public List<ShipRuleInfo> getShipsTypes() {
+        return shipRuleInfos;
     }
 
     public int getShipsAmount() {

@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.mygdx.seabattletest.utils.ScreenListener;
 import com.mygdx.seabattletest.objects.BackgroundActor;
 import com.mygdx.seabattletest.resources.GameAssets;
 import com.mygdx.seabattletest.utils.GameUtils;
@@ -19,14 +20,16 @@ import com.mygdx.seabattletest.utils.GameUtils;
 public abstract class BaseScreen implements Screen {
 
     protected GameAssets gameAssets;
+    protected ScreenListener screenListener;
     protected SpriteBatch spriteBatch;
     protected Stage stage;
     protected Skin skin;
 
     protected Actor backgroundActor;
 
-    public BaseScreen(GameAssets gameAssets) {
+    public BaseScreen(GameAssets gameAssets, ScreenListener screenListener) {
         this.gameAssets = gameAssets;
+        this.screenListener = screenListener;
         stage = new Stage(new ExtendViewport(GameUtils.SCREEN_WIDTH_DEFAULT, GameUtils.SCREEN_HEIGHT_DEFAULT));
         skin = new Skin();
         skin.addRegions(gameAssets.uiSkinAtlas);

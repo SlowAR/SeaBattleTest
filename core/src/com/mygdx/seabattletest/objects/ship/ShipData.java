@@ -10,12 +10,31 @@ public class ShipData {
     private int cellPositionY;
     private int widthCells;
     private int heightCells;
+    private boolean isHorizontal = true;
 
-    public ShipData(int cellPositionX, int cellPositionY, int widthCells, int heightCells) {
-        this.cellPositionX = cellPositionX;
-        this.cellPositionY = cellPositionY;
+    public ShipData(int widthCells, int heightCells) {
         this.widthCells = widthCells;
         this.heightCells = heightCells;
+    }
+
+    public void setCellPositionX(int cellPositionX) {
+        this.cellPositionX = cellPositionX;
+    }
+
+    public void setCellPositionY(int cellPositionY) {
+        this.cellPositionY = cellPositionY;
+    }
+
+    public void setWidthCells(int widthCells) {
+        this.widthCells = widthCells;
+    }
+
+    public void setHeightCells(int heightCells) {
+        this.heightCells = heightCells;
+    }
+
+    public void setHorizontal(boolean horizontal) {
+        isHorizontal = horizontal;
     }
 
     public int getCellPositionX() {
@@ -27,10 +46,28 @@ public class ShipData {
     }
 
     public int getWidthCells() {
-        return widthCells;
+        return isHorizontal ? widthCells : heightCells;
     }
 
     public int getHeightCells() {
-        return heightCells;
+        return isHorizontal ? heightCells : widthCells;
+    }
+
+    public boolean isHorizontal() {
+        return isHorizontal;
+    }
+
+    public boolean isOverlaps(ShipData shipData) {
+        boolean xAxisOverlaps = (cellPositionX >= shipData.getCellPositionX() &&
+                cellPositionX <= shipData.getCellPositionX() + shipData.getWidthCells())
+                ||
+                (shipData.getCellPositionX() >= cellPositionX &&
+                        shipData.getCellPositionX() <= cellPositionX + getWidthCells());
+        boolean yAxisOverlaps = (cellPositionY >= shipData.getCellPositionY() &&
+                cellPositionY <= shipData.getCellPositionY() + shipData.getHeightCells())
+                ||
+                (shipData.getCellPositionY() >= cellPositionY &&
+                        shipData.getCellPositionY() <= cellPositionY + getHeightCells());
+        return xAxisOverlaps && yAxisOverlaps;
     }
 }
