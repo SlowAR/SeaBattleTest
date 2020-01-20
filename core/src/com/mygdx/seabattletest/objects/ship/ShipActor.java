@@ -13,16 +13,13 @@ import com.mygdx.seabattletest.ui.board.utils.GameRules;
 public class ShipActor extends Actor {
 
     private GameAssets gameAssets;
+    private GameRules gameRules;
     private ShipData shipData;
-
-    private int oneCellBorderOffset;
-    private int boardHeight;
 
     public ShipActor(GameAssets gameAssets, GameRules gameRules) {
         this.gameAssets = gameAssets;
+        this.gameRules = gameRules;
         shipData = new ShipData(0, 0);
-        oneCellBorderOffset = gameRules.isHaveOneCellBorder() ? 2 : 0;
-        boardHeight = gameRules.getBoardHeight() - (gameRules.isHaveOneCellBorder() ? 2 : 0);
     }
 
     public void applyShipData(ShipData shipData) {
@@ -32,9 +29,9 @@ public class ShipActor extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        for (int i = shipData.getCellPositionY() + shipData.getHeightCells() - oneCellBorderOffset; i > shipData.getCellPositionY(); i--) {
-            for (int j = shipData.getCellPositionX(); j < shipData.getCellPositionX() + shipData.getWidthCells() - oneCellBorderOffset; j++) {
-                batch.draw(gameAssets.circleMask, Constants.BOARD_CELL_WIDTH * j, Constants.BOARD_CELL_HEIGHT * (boardHeight - i),
+        for (int i = shipData.getCellPositionY() + shipData.getHeightCells(); i > shipData.getCellPositionY(); i--) {
+            for (int j = shipData.getCellPositionX(); j < shipData.getCellPositionX() + shipData.getWidthCells(); j++) {
+                batch.draw(gameAssets.ship, Constants.BOARD_CELL_WIDTH * j, Constants.BOARD_CELL_HEIGHT * (gameRules.getBoardHeight() - i),
                         Constants.BOARD_CELL_WIDTH, Constants.BOARD_CELL_HEIGHT);
             }
         }
