@@ -25,15 +25,17 @@ public class GameRules {
     }
 
     public GameRules addDefaultShipTypes() {
-        shipRuleInfos.add(new ShipRuleInfo(1, 4, 1));
-        shipRuleInfos.add(new ShipRuleInfo(1, 3, 2));
-        shipRuleInfos.add(new ShipRuleInfo(1, 2, 3));
-        shipRuleInfos.add(new ShipRuleInfo(1, 1, 4));
+        int additionalSize = isHaveOneCellBorder ? 2 : 0;
+        shipRuleInfos.add(new ShipRuleInfo(1 + additionalSize, 4 + additionalSize, 1));
+        shipRuleInfos.add(new ShipRuleInfo(1 + additionalSize, 3 + additionalSize, 2));
+        shipRuleInfos.add(new ShipRuleInfo(1 + additionalSize, 2 + additionalSize, 3));
+        shipRuleInfos.add(new ShipRuleInfo(1 + additionalSize, 1 + additionalSize, 4));
         return this;
     }
 
     public GameRules addShipType(int widthCells, int heightCells, int amount) {
-        shipRuleInfos.add(new ShipRuleInfo(widthCells, heightCells, amount));
+        int additionalSize = isHaveOneCellBorder ? 2 : 0;
+        shipRuleInfos.add(new ShipRuleInfo(widthCells + additionalSize, heightCells + additionalSize, amount));
         return this;
     }
 
@@ -56,11 +58,15 @@ public class GameRules {
     }
 
     public int getBoardWidth() {
-        return boardWidth;
+        return isHaveOneCellBorder ? (boardWidth + 2) : boardWidth;
     }
 
     public int getBoardHeight() {
-        return boardHeight;
+        return isHaveOneCellBorder ? (boardHeight + 2) : boardHeight;
+    }
+
+    public List<ShipRuleInfo> getShipsTypes() {
+        return shipRuleInfos;
     }
 
     public int getShipsAmount() {
