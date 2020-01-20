@@ -26,8 +26,8 @@ public class ShipActor extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        for (int i = shipData.getCellPositionY(); i < shipData.getCellPositionY() + shipData.getHeightCells(); i++) {
-            for (int j = shipData.getCellPositionX(); j < shipData.getCellPositionX() + shipData.getWidthCells(); j++) {
+        for (int i = shipData.getCellPositionY() + 1; i < shipData.getCellPositionY() + shipData.getHeightCells() - 1; i++) {
+            for (int j = shipData.getCellPositionX() + 1; j < shipData.getCellPositionX() + shipData.getWidthCells() - 1; j++) {
                 batch.draw(gameAssets.circleMask, Constants.BOARD_CELL_WIDTH * j, Constants.BOARD_CELL_HEIGHT * i,
                         Constants.BOARD_CELL_WIDTH, Constants.BOARD_CELL_HEIGHT);
             }

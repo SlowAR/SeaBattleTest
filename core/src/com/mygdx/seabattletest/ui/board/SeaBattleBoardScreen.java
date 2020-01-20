@@ -11,8 +11,8 @@ import com.mygdx.seabattletest.common.Constants;
 import com.mygdx.seabattletest.objects.BoardActor;
 import com.mygdx.seabattletest.objects.MaskActor;
 import com.mygdx.seabattletest.objects.ship.ShipData;
-import com.mygdx.seabattletest.objects.ship.ShipData;
 import com.mygdx.seabattletest.resources.GameAssets;
+import com.mygdx.seabattletest.ui.board.utils.GameRules;
 import com.mygdx.seabattletest.utils.ScreenListener;
 
 import java.util.List;
@@ -52,10 +52,9 @@ public class SeaBattleBoardScreen extends BaseScreen implements SeaBattleBoardCo
     }
 
     @Override
-    public void onBoardCreated(int cellsWidth, int cellsHeight, int shipsAmount) {
+    public void onBoardCreated(GameRules gameRules) {
         boardActor.setPosition(Constants.BOARD_CELL_WIDTH * 2, Constants.BOARD_CELL_HEIGHT);
-        boardActor.setSize(Constants.BOARD_CELL_WIDTH * cellsWidth, Constants.BOARD_CELL_HEIGHT * cellsHeight);
-        boardActor.init(skin, cellsWidth, cellsHeight, shipsAmount);
+        boardActor.init(skin, gameRules);
         setupUi();
     }
 

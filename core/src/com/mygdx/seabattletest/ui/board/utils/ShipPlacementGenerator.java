@@ -64,7 +64,7 @@ public class ShipPlacementGenerator implements PlacementGenerator {
         int boardLimitY = gameRules.getBoardHeight() - currentShipData.getHeightCells();
         if (currentShipData.getCellPositionX() + 1 > boardLimitX) {
             currentShipData.setCellPositionX(0);
-            if (currentShipData.getCellPositionX() + 1 > boardLimitY) {
+            if (currentShipData.getCellPositionY() + 1 > boardLimitY) {
                 currentShipData.setCellPositionY(0);
             } else {
                 currentShipData.setCellPositionY(currentShipData.getCellPositionY() + 1);
@@ -76,7 +76,7 @@ public class ShipPlacementGenerator implements PlacementGenerator {
         if (currentShipData.getCellPositionX() == oldPositionX && currentShipData.getCellPositionY() == oldPositionY) {
             if (isRotatedForFix) {
                 GameUtils.printSeaBoard(gameRules, placedShips);
-                throw new IllegalStateException("Cannot find where place the ship!");
+                throw new IllegalStateException("Cannot find the place for ship!");
             } else {
                 currentShipData.setHorizontal(!currentShipData.isHorizontal());
                 isRotatedForFix = true;

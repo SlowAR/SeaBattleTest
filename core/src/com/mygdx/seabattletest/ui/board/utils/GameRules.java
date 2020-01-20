@@ -25,17 +25,15 @@ public class GameRules {
     }
 
     public GameRules addDefaultShipTypes() {
-        int additionalSize = isHaveOneCellBorder ? 2 : 0;
-        shipRuleInfos.add(new ShipRuleInfo(1 + additionalSize, 4 + additionalSize, 1));
-        shipRuleInfos.add(new ShipRuleInfo(1 + additionalSize, 3 + additionalSize, 2));
-        shipRuleInfos.add(new ShipRuleInfo(1 + additionalSize, 2 + additionalSize, 3));
-        shipRuleInfos.add(new ShipRuleInfo(1 + additionalSize, 1 + additionalSize, 4));
+        shipRuleInfos.add(new ShipRuleInfo(1, 4, 1));
+        shipRuleInfos.add(new ShipRuleInfo(1, 3, 2));
+        shipRuleInfos.add(new ShipRuleInfo(1, 2, 3));
+        shipRuleInfos.add(new ShipRuleInfo(1, 1, 4));
         return this;
     }
 
     public GameRules addShipType(int widthCells, int heightCells, int amount) {
-        int additionalSize = isHaveOneCellBorder ? 2 : 0;
-        shipRuleInfos.add(new ShipRuleInfo(widthCells + additionalSize, heightCells + additionalSize, amount));
+        shipRuleInfos.add(new ShipRuleInfo(widthCells, heightCells, amount));
         return this;
     }
 
@@ -53,6 +51,12 @@ public class GameRules {
         }
         if (getShipsAmount() == 0) {
             throw new IllegalStateException("Board cannot exist without any ship!");
+        }
+
+        if (isHaveOneCellBorder) {
+            for (ShipRuleInfo shipRuleInfo : shipRuleInfos) {
+                shipRuleInfo.changeSize(shipRuleInfo.getWidthCells() + 2, shipRuleInfo.getHeightCells() + 2);
+            }
         }
         return this;
     }

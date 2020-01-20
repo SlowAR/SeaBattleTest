@@ -37,7 +37,7 @@ public class SeaBattleBoard extends BaseLogic<SeaBattleBoardContract.View> imple
                     .build();
         }
         shipPlacementGenerator = new ShipPlacementGenerator(gameRules);
-        getView().onBoardCreated(gameRules.getBoardWidth(), gameRules.getBoardHeight(), gameRules.getShipsAmount());
+        getView().onBoardCreated(gameRules);
         return this;
     }
 
