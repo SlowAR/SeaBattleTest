@@ -79,6 +79,7 @@ public class GameUtils {
         }
 
         for (int i = 0; i < gameRules.getBoardHeight(); i++) {
+            System.out.print(i + ") ");
             for (int j = 0; j < gameRules.getBoardWidth(); j++) {
                 System.out.print(board[i][j] + " ");
             }
@@ -86,19 +87,3 @@ public class GameUtils {
         }
     }
 }
-
-//0 0 0 0 0 0 0 0 1 1 0 0
-//0 0 0 0 0 0 0 0 0 0 0 0
-//0 0 0 0 0 0 0 0 0 0 0 0
-//0 0 0 0 0 1 0 0 1 0 0 0
-//0 0 0 1 0 1 0 0 1 0 0 0
-//0 1 0 1 0 1 0 0 1 0 0 0
-//0 0 0 1 0 0 1 0 0 0 0 0
-//0 0 0 0 0 0 1 1 1 1 0 0
-//0 0 0 0 0 0 1 0 0 0 0 0
-//0 0 0 0 0 0 0 0 0 0 0 0
-//0 0 0 0 0 0 0 0 0 0 0 0
-//x4: 0
-//x3: 0
-//x2: 1
-//x1: 0

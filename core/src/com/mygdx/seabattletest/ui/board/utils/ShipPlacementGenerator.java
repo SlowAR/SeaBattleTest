@@ -30,12 +30,9 @@ public class ShipPlacementGenerator implements PlacementGenerator {
         for (ShipRuleInfo shipRuleInfo : shipRuleInfos) {
             for (int i = 0; i < shipRuleInfo.getAmount(); i++) {
                 ShipData shipData = new ShipData(shipRuleInfo.getWidthCells(), shipRuleInfo.getHeightCells());
-//                shipData.setHorizontal(GameUtils.getRandomRange(0, 1) == 1);
-//                int x = oldPositionX = GameUtils.getRandomRange(0, boardWidth - shipData.getWidthCells());
-//                int y = oldPositionY = GameUtils.getRandomRange(0, boardHeight - shipData.getHeightCells());
-                shipData.setHorizontal(true);
-                int x = oldPositionX = 3;
-                int y = oldPositionY = 2;
+                shipData.setHorizontal(GameUtils.getRandomRange(0, 1) == 1);
+                int x = oldPositionX = GameUtils.getRandomRange(0, boardWidth - shipData.getWidthCells());
+                int y = oldPositionY = GameUtils.getRandomRange(0, boardHeight - shipData.getHeightCells());
                 shipData.setCellPositionX(x);
                 shipData.setCellPositionY(y);
                 verifyPlacement(shipData, shipDataList);

@@ -27,9 +27,9 @@ public class GameRules {
     public GameRules addDefaultShipTypes() {
         int additionalSize = isHaveOneCellBorder ? 2 : 0;
         shipRuleInfos.add(new ShipRuleInfo(1 + additionalSize, 4 + additionalSize, 1));
-//        shipRuleInfos.add(new ShipRuleInfo(1 + additionalSize, 3 + additionalSize, 2));
-//        shipRuleInfos.add(new ShipRuleInfo(1 + additionalSize, 2 + additionalSize, 3));
-//        shipRuleInfos.add(new ShipRuleInfo(1 + additionalSize, 1 + additionalSize, 4));
+        shipRuleInfos.add(new ShipRuleInfo(1 + additionalSize, 3 + additionalSize, 2));
+        shipRuleInfos.add(new ShipRuleInfo(1 + additionalSize, 2 + additionalSize, 3));
+        shipRuleInfos.add(new ShipRuleInfo(1 + additionalSize, 1 + additionalSize, 4));
         return this;
     }
 
