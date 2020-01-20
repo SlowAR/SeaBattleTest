@@ -2,6 +2,7 @@ package com.mygdx.seabattletest.ui.board;
 
 import com.mygdx.seabattletest.common.GameView;
 import com.mygdx.seabattletest.objects.ship.ShipData;
+import com.mygdx.seabattletest.ui.board.utils.GameRules;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface SeaBattleBoardContract {
 
     interface View extends GameView {
 
-        void onBoardCreated(int cellsWidth, int cellsHeight, int shipsAmount);
+        void onBoardCreated(GameRules gameRules);
 
         void placeShips(List<ShipData> shipDataList);
     }
