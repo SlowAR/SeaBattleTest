@@ -4,8 +4,10 @@ import com.mygdx.seabattletest.common.BaseLogic;
 import com.mygdx.seabattletest.common.Constants;
 import com.mygdx.seabattletest.objects.ship.ShipData;
 import com.mygdx.seabattletest.ui.board.utils.GameRules;
+import com.mygdx.seabattletest.ui.board.utils.PlacementGenerator;
+import com.mygdx.seabattletest.ui.board.utils.ShipPlacementGenerator;
+import com.mygdx.seabattletest.utils.GameUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,6 +17,7 @@ import java.util.List;
 public class SeaBattleBoard extends BaseLogic<SeaBattleBoardContract.View> implements SeaBattleBoardContract.Logic {
 
     private GameRules gameRules;
+    private PlacementGenerator shipPlacementGenerator;
 
     public SeaBattleBoard(SeaBattleBoardContract.View view) {
         super(view);
@@ -33,14 +36,15 @@ public class SeaBattleBoard extends BaseLogic<SeaBattleBoardContract.View> imple
                     .setOneCellShipsBorder()
                     .build();
         }
+        shipPlacementGenerator = new ShipPlacementGenerator(gameRules);
         getView().onBoardCreated(gameRules.getBoardWidth(), gameRules.getBoardHeight(), gameRules.getShipsAmount());
         return this;
     }
 
     @Override
     public void onAutoButtonClick() {
-        List<ShipData> shipDataList = new ArrayList<>();
-        //place ships logic
+        List<ShipData> shipDataList = shipPlacementGenerator.generate();
+        GameUtils.printSeaBoard(gameRules, shipDataList);
         getView().placeShips(shipDataList);
     }
 

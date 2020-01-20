@@ -42,7 +42,7 @@ public class SeaBattleBoardScreen extends BaseScreen implements SeaBattleBoardCo
         stage.addActor(boardActor);
 
         maskActor = new MaskActor(gameAssets);
-        stage.addActor(maskActor);
+        //stage.addActor(maskActor);
     }
 
     @Override
