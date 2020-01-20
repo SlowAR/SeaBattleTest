@@ -58,10 +58,16 @@ public class ShipData {
     }
 
     public boolean isOverlaps(ShipData shipData) {
-        boolean xAxisOverlaps = (cellPositionX + widthCells < shipData.getCellPositionX()) &&
-                (cellPositionX > shipData.getCellPositionX() + shipData.getWidthCells());
-        boolean yAxisOverlaps = (cellPositionY + heightCells < shipData.getCellPositionY()) &&
-                (cellPositionY > shipData.getCellPositionY() + shipData.getHeightCells());
+        boolean xAxisOverlaps = (cellPositionX >= shipData.getCellPositionX() &&
+                cellPositionX <= shipData.getCellPositionX() + shipData.getWidthCells())
+                ||
+                (shipData.getCellPositionX() >= cellPositionX &&
+                        shipData.getCellPositionX() <= cellPositionX + getWidthCells());
+        boolean yAxisOverlaps = (cellPositionY >= shipData.getCellPositionY() &&
+                cellPositionY <= shipData.getCellPositionY() + shipData.getHeightCells())
+                ||
+                (shipData.getCellPositionY() >= cellPositionY &&
+                        shipData.getCellPositionY() <= cellPositionY + getHeightCells());
         return xAxisOverlaps && yAxisOverlaps;
     }
 }

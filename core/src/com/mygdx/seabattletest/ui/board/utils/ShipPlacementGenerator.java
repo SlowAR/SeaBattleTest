@@ -28,6 +28,28 @@ public class ShipPlacementGenerator implements PlacementGenerator {
         int boardHeight = gameRules.getBoardHeight();
         int startLimit = gameRules.isHaveOneCellBorder() ? 0 : 1;
 
+//        ShipData shipData = new ShipData(6, 3);
+//        shipData.setHorizontal(true);
+//        int x = oldPositionX = 4;
+//        int y = oldPositionY = 9;
+//        shipData.setCellPositionX(x);
+//        shipData.setCellPositionY(y);
+//        System.out.println("testlog " + shipData.getWidthCells() + "x" + shipData.getHeightCells() + " x: " + shipData.getCellPositionX() + " y: " + shipData.getCellPositionY());
+//        verifyPlacement(shipData, shipDataList);
+//        shipDataList.add(shipData);
+//        isRotatedForFix = false;
+//
+//        ShipData shipData2 = new ShipData(5, 3);
+//        shipData2.setHorizontal(false);
+//        int x2 = oldPositionX = 7;
+//        int y2 = oldPositionY = 7;
+//        shipData2.setCellPositionX(x2);
+//        shipData2.setCellPositionY(y2);
+//        System.out.println("testlog " + shipData2.getWidthCells() + "x" + shipData2.getHeightCells() + " x: " + shipData2.getCellPositionX() + " y: " + shipData2.getCellPositionY());
+//        verifyPlacement(shipData2, shipDataList);
+//        shipDataList.add(shipData2);
+//        isRotatedForFix = false;
+
         for (ShipRuleInfo shipRuleInfo : shipRuleInfos) {
             for (int i = 0; i < shipRuleInfo.getAmount(); i++) {
                 ShipData shipData = new ShipData(shipRuleInfo.getWidthCells(), shipRuleInfo.getHeightCells());
