@@ -26,17 +26,20 @@ public class ShipPlacementGenerator implements PlacementGenerator {
         List<ShipRuleInfo> shipRuleInfos = gameRules.getShipsTypes();
         int boardWidth = gameRules.getBoardWidth();
         int boardHeight = gameRules.getBoardHeight();
+        int startLimit = gameRules.isHaveOneCellBorder() ? 0 : 1;
 
         for (ShipRuleInfo shipRuleInfo : shipRuleInfos) {
             for (int i = 0; i < shipRuleInfo.getAmount(); i++) {
                 ShipData shipData = new ShipData(shipRuleInfo.getWidthCells(), shipRuleInfo.getHeightCells());
                 shipData.setHorizontal(GameUtils.getRandomRange(0, 1) == 1);
-                int x = oldPositionX = GameUtils.getRandomRange(0, boardWidth - shipData.getWidthCells());
-                int y = oldPositionY = GameUtils.getRandomRange(0, boardHeight - shipData.getHeightCells());
+                int x = oldPositionX = GameUtils.getRandomRange(startLimit, boardWidth - shipData.getWidthCells());
+                int y = oldPositionY = GameUtils.getRandomRange(startLimit, boardHeight - shipData.getHeightCells());
                 shipData.setCellPositionX(x);
                 shipData.setCellPositionY(y);
+                System.out.println("testlog " + shipData.getWidthCells() + "x" + shipData.getHeightCells() + " x: " + shipData.getCellPositionX() + " y: " + shipData.getCellPositionY());
                 verifyPlacement(shipData, shipDataList);
                 shipDataList.add(shipData);
+                isRotatedForFix = false;
             }
         }
 
