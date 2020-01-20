@@ -59,7 +59,7 @@ public abstract class BaseScreen implements Screen {
         draw();
         spriteBatch.end();
 
-        stage.act(Gdx.graphics.getDeltaTime());
+        stage.act();
         stage.draw();
 
         spriteBatch.begin();
