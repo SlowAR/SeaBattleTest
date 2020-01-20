@@ -2,6 +2,8 @@ package com.mygdx.seabattletest.objects.ship;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.mygdx.seabattletest.common.Constants;
+import com.mygdx.seabattletest.resources.GameAssets;
 
 /**
  * Created by SlowAR on 18.01.2020.
@@ -9,12 +11,26 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class ShipActor extends Actor {
 
-    public ShipActor() {
+    private GameAssets gameAssets;
+    private ShipData shipData;
+
+    public ShipActor(GameAssets gameAssets) {
+        this.gameAssets = gameAssets;
+        shipData = new ShipData(0, 0);
+    }
+
+    public void applyShipData(ShipData shipData) {
+        this.shipData = shipData;
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-
+        for (int i = shipData.getCellPositionY(); i < shipData.getCellPositionY() + shipData.getHeightCells(); i++) {
+            for (int j = shipData.getCellPositionX(); j < shipData.getCellPositionX() + shipData.getWidthCells(); j++) {
+                batch.draw(gameAssets.circleMask, Constants.BOARD_CELL_WIDTH * j, Constants.BOARD_CELL_HEIGHT * i,
+                        Constants.BOARD_CELL_WIDTH, Constants.BOARD_CELL_HEIGHT);
+            }
+        }
     }
 }

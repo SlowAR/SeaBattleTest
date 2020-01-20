@@ -20,15 +20,19 @@ import java.util.List;
 
 public class BoardActor extends Group {
 
+    private GameAssets gameAssets;
     private NinePatch boardNinePatch;
     private List<ShipActor> shipsList;
 
     public BoardActor(GameAssets gameAssets) {
+        this.gameAssets = gameAssets;
         shipsList = new ArrayList<>();
         boardNinePatch = new NinePatch(gameAssets.button, 16, 16, 16, 16);
     }
 
     public void init(Skin skin, int cellsWidth, int cellsHeight, int shipsAmount) {
+        clearChildren();
+        
         for (int i = 1; i <= cellsWidth; i++) {
             Label label = new Label(String.valueOf(i), skin);
             label.setFontScale(0.333f);
@@ -52,7 +56,7 @@ public class BoardActor extends Group {
 
     private void createShips(int shipsAmount) {
         for (int i = 0; i < shipsAmount; i++) {
-            ShipActor shipActor = new ShipActor();
+            ShipActor shipActor = new ShipActor(gameAssets);
             shipActor.setPosition(Constants.BOARD_CELL_WIDTH, Constants.BOARD_CELL_HEIGHT);
             addActor(shipActor);
             shipsList.add(shipActor);
@@ -60,7 +64,13 @@ public class BoardActor extends Group {
     }
 
     public void placeShips(List<ShipData> shipDataList) {
+        if (shipDataList.size() != shipsList.size()) {
+            throw new IllegalStateException("Ships amount and ships place data amount not equal! Maybe you forgot to init() the board?");
+        }
 
+        for (int i = 0; i < shipDataList.size(); i++) {
+            shipsList.get(i).applyShipData(shipDataList.get(i));
+        }
     }
 
     @Override
