@@ -2,18 +2,19 @@ package com.mygdx.seabattletest.ui.board;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 import com.mygdx.seabattletest.common.BaseScreen;
 import com.mygdx.seabattletest.common.Constants;
 import com.mygdx.seabattletest.objects.BoardActor;
 import com.mygdx.seabattletest.objects.MaskActor;
-import com.mygdx.seabattletest.objects.ship.ShipActor;
+import com.mygdx.seabattletest.objects.ship.ShipData;
 import com.mygdx.seabattletest.objects.ship.ShipData;
 import com.mygdx.seabattletest.resources.GameAssets;
 import com.mygdx.seabattletest.utils.ScreenListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,12 +27,10 @@ public class SeaBattleBoardScreen extends BaseScreen implements SeaBattleBoardCo
 
     private BoardActor boardActor;
     private TextButton autoButton;
-    private List<ShipActor> shipsList;
     private Actor maskActor;
 
     public SeaBattleBoardScreen(GameAssets gameAssets, ScreenListener screenListener) {
         super(gameAssets, screenListener);
-        shipsList = new ArrayList<>();
         seaBattleBoard = new SeaBattleBoard(this).build();
     }
 
@@ -42,25 +41,22 @@ public class SeaBattleBoardScreen extends BaseScreen implements SeaBattleBoardCo
         stage.addActor(boardActor);
 
         maskActor = new MaskActor(gameAssets);
-        //stage.addActor(maskActor);
+        maskActor.setTouchable(Touchable.enabled);
+        maskActor.addListener(new DragListener() {
+            @Override
+            public void drag(InputEvent event, float x, float y, int pointer) {
+                maskActor.moveBy(x - maskActor.getWidth() / 2, y - maskActor.getHeight() / 2);
+            }
+        });
+        stage.addActor(maskActor);
     }
 
     @Override
     public void onBoardCreated(int cellsWidth, int cellsHeight, int shipsAmount) {
         boardActor.setPosition(Constants.BOARD_CELL_WIDTH * 2, Constants.BOARD_CELL_HEIGHT);
         boardActor.setSize(Constants.BOARD_CELL_WIDTH * cellsWidth, Constants.BOARD_CELL_HEIGHT * cellsHeight);
-        boardActor.init(skin, cellsWidth, cellsHeight);
-        createShips(shipsAmount);
+        boardActor.init(skin, cellsWidth, cellsHeight, shipsAmount);
         setupUi();
-    }
-
-    private void createShips(int shipsAmount) {
-        for (int i = 0; i < shipsAmount; i++) {
-            ShipActor shipActor = new ShipActor();
-            shipActor.setPosition(Constants.BOARD_CELL_WIDTH, Constants.BOARD_CELL_HEIGHT);
-            stage.addActor(shipActor);
-            shipsList.add(shipActor);
-        }
     }
 
     private void setupUi() {
@@ -78,7 +74,7 @@ public class SeaBattleBoardScreen extends BaseScreen implements SeaBattleBoardCo
 
     @Override
     public void placeShips(List<ShipData> shipDataList) {
-
+        boardActor.placeShips(shipDataList);
     }
 
     @Override

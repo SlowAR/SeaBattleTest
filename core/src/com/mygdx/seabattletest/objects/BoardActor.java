@@ -7,7 +7,12 @@ import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.mygdx.seabattletest.common.Constants;
+import com.mygdx.seabattletest.objects.ship.ShipActor;
+import com.mygdx.seabattletest.objects.ship.ShipData;
 import com.mygdx.seabattletest.resources.GameAssets;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by SlowAR on 18.01.2020.
@@ -16,12 +21,14 @@ import com.mygdx.seabattletest.resources.GameAssets;
 public class BoardActor extends Group {
 
     private NinePatch boardNinePatch;
+    private List<ShipActor> shipsList;
 
     public BoardActor(GameAssets gameAssets) {
+        shipsList = new ArrayList<>();
         boardNinePatch = new NinePatch(gameAssets.button, 16, 16, 16, 16);
     }
 
-    public void init(Skin skin, int cellsWidth, int cellsHeight) {
+    public void init(Skin skin, int cellsWidth, int cellsHeight, int shipsAmount) {
         for (int i = 1; i <= cellsWidth; i++) {
             Label label = new Label(String.valueOf(i), skin);
             label.setFontScale(0.333f);
@@ -39,6 +46,21 @@ public class BoardActor extends Group {
             label.setColor(Color.BLUE);
             addActor(label);
         }
+
+        createShips(shipsAmount);
+    }
+
+    private void createShips(int shipsAmount) {
+        for (int i = 0; i < shipsAmount; i++) {
+            ShipActor shipActor = new ShipActor();
+            shipActor.setPosition(Constants.BOARD_CELL_WIDTH, Constants.BOARD_CELL_HEIGHT);
+            addActor(shipActor);
+            shipsList.add(shipActor);
+        }
+    }
+
+    public void placeShips(List<ShipData> shipDataList) {
+
     }
 
     @Override
