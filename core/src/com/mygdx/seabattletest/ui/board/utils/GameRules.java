@@ -12,7 +12,6 @@ public class GameRules {
     private int boardWidth;
     private int boardHeight;
     private List<ShipRuleInfo> shipRuleInfos;
-    private boolean isHaveOneCellBorder;
 
     public GameRules() {
         shipRuleInfos = new ArrayList<>();
@@ -37,11 +36,6 @@ public class GameRules {
         return this;
     }
 
-    public GameRules setOneCellShipsBorder() {
-        isHaveOneCellBorder = true;
-        return this;
-    }
-
     public GameRules build() {
         if (boardWidth <= 0) {
             throw new IllegalStateException("Board width cannot be less or equal zero!");
@@ -52,21 +46,15 @@ public class GameRules {
         if (getShipsAmount() == 0) {
             throw new IllegalStateException("Board cannot exist without any ship!");
         }
-
-        if (isHaveOneCellBorder) {
-            for (ShipRuleInfo shipRuleInfo : shipRuleInfos) {
-                shipRuleInfo.changeSize(shipRuleInfo.getWidthCells() + 2, shipRuleInfo.getHeightCells() + 2);
-            }
-        }
         return this;
     }
 
     public int getBoardWidth() {
-        return isHaveOneCellBorder ? (boardWidth + 2) : boardWidth;
+        return boardWidth;
     }
 
     public int getBoardHeight() {
-        return isHaveOneCellBorder ? (boardHeight + 2) : boardHeight;
+        return boardHeight;
     }
 
     public List<ShipRuleInfo> getShipsTypes() {
@@ -79,9 +67,5 @@ public class GameRules {
             ships += shipRuleInfo.getAmount();
         }
         return ships;
-    }
-
-    public boolean isHaveOneCellBorder() {
-        return isHaveOneCellBorder;
     }
 }

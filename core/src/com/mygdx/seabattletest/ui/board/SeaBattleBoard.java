@@ -33,7 +33,6 @@ public class SeaBattleBoard extends BaseLogic<SeaBattleBoardContract.View> imple
             gameRules = new GameRules()
                     .setBoardSize(Constants.DEFAULT_BOARD_SIZE, Constants.DEFAULT_BOARD_SIZE)
                     .addDefaultShipTypes()
-                    .setOneCellShipsBorder()
                     .build();
         }
         shipPlacementGenerator = new ShipPlacementGenerator(gameRules);
@@ -44,7 +43,6 @@ public class SeaBattleBoard extends BaseLogic<SeaBattleBoardContract.View> imple
     @Override
     public void onAutoButtonClick() {
         List<ShipData> shipDataList = shipPlacementGenerator.generate();
-        GameUtils.printSeaBoard(gameRules, shipDataList);
         getView().placeShips(shipDataList);
     }
 
