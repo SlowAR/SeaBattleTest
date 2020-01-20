@@ -53,7 +53,6 @@ public class GameUtils {
         GameRules gameRules = new GameRules()
                 .setBoardSize(10, 10)
                 .addDefaultShipTypes()
-                .setOneCellShipsBorder()
                 .build();
 
         ShipData shipData = new ShipData(3, 1);

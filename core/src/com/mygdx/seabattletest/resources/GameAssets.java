@@ -54,8 +54,6 @@ public class GameAssets {
         button.getTexture().bind();
         Gdx.gl.glActiveTexture(Gdx.gl.GL_TEXTURE0);
         ship.getTexture().bind();
-
-        maskShader.setUniformf(maskShader.getUniformLocation(""));
     }
 
     public void loadTexturesRegions() {

@@ -32,12 +32,10 @@ public class BoardActor extends Group {
     }
 
     public void init(Skin skin, GameRules gameRules) {
-        int boardCellsWidth = gameRules.isHaveOneCellBorder() ? gameRules.getBoardWidth() - 2 : gameRules.getBoardWidth();
-        int boardCellsHeight = gameRules.isHaveOneCellBorder() ? gameRules.getBoardHeight() - 2 : gameRules.getBoardHeight();
-        setSize(Constants.BOARD_CELL_WIDTH * boardCellsWidth, Constants.BOARD_CELL_HEIGHT * boardCellsHeight);
+        setSize(Constants.BOARD_CELL_WIDTH * gameRules.getBoardWidth(), Constants.BOARD_CELL_HEIGHT * gameRules.getBoardHeight());
         clearChildren();
 
-        for (int i = 1; i <= boardCellsWidth; i++) {
+        for (int i = 1; i <= gameRules.getBoardWidth(); i++) {
             Label label = new Label(String.valueOf(i), skin);
             label.setFontScale(0.333f);
             label.setPosition(Constants.BOARD_CELL_WIDTH * (i - 1), getHeight() - Constants.BOARD_CELL_HEIGHT);
@@ -45,7 +43,7 @@ public class BoardActor extends Group {
             addActor(label);
         }
 
-        for (int i = 1; i <= boardCellsHeight; i++) {
+        for (int i = 1; i <= gameRules.getBoardHeight(); i++) {
             char letter = (char) ((int) 'A' + (i - 1));
             Label label = new Label(String.valueOf(letter), skin);
             label.setFontScale(0.333f);
