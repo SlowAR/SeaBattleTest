@@ -34,7 +34,7 @@ public class ShipActor extends Actor {
         super.draw(batch, parentAlpha);
         for (int i = shipData.getCellPositionY() + shipData.getHeightCells() - oneCellBorderOffset; i > shipData.getCellPositionY(); i--) {
             for (int j = shipData.getCellPositionX(); j < shipData.getCellPositionX() + shipData.getWidthCells() - oneCellBorderOffset; j++) {
-                batch.draw(gameAssets.circleMask, Constants.BOARD_CELL_WIDTH * j, Constants.BOARD_CELL_HEIGHT * (boardHeight - i),
+                batch.draw(gameAssets.ship, Constants.BOARD_CELL_WIDTH * j, Constants.BOARD_CELL_HEIGHT * (boardHeight - i),
                         Constants.BOARD_CELL_WIDTH, Constants.BOARD_CELL_HEIGHT);
             }
         }
