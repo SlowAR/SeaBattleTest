@@ -21,7 +21,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-        project.ext.set("archivesBaseName", "insane_bullet_" + defaultConfig.versionName)
+        project.ext.set("archivesBaseName", "sea-battle-test-" + defaultConfig.versionName)
         ndk {
             abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86", "x86_64", "mips"
         }

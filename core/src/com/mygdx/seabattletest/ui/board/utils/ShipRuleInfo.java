@@ -24,11 +24,6 @@ public class ShipRuleInfo {
         return heightCells;
     }
 
-    public void changeSize(int widthCells, int heightCells) {
-        this.widthCells = widthCells;
-        this.heightCells = heightCells;
-    }
-
     public int getAmount() {
         return amount;
     }
