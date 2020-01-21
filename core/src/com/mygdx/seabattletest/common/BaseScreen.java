@@ -8,10 +8,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.mygdx.seabattletest.utils.ScreenListener;
 import com.mygdx.seabattletest.objects.BackgroundActor;
 import com.mygdx.seabattletest.resources.GameAssets;
 import com.mygdx.seabattletest.utils.GameUtils;
+import com.mygdx.seabattletest.utils.ScreenListener;
 
 /**
  * Created by SlowAR on 18.01.2020.
