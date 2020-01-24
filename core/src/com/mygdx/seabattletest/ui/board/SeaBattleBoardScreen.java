@@ -75,14 +75,4 @@ public class SeaBattleBoardScreen extends BaseScreen implements SeaBattleBoardCo
     public void placeShips(List<ShipData> shipDataList) {
         boardActor.placeShips(shipDataList);
     }
-
-    @Override
-    public void draw() {
-        super.draw();
-    }
-
-    @Override
-    public void dispose() {
-        super.dispose();
-    }
 }

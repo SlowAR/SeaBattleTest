@@ -1,7 +1,6 @@
 package com.mygdx.seabattletest.resources;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -48,12 +47,6 @@ public class GameAssets {
             System.err.println(maskShader.getLog());
             System.exit(0);
         }
-        spriteBatch.setShader(maskShader);
-        maskShader.setUniformi("u_mask", 1);
-        Gdx.gl.glActiveTexture(Gdx.gl.GL_TEXTURE1);
-        button.getTexture().bind();
-        Gdx.gl.glActiveTexture(Gdx.gl.GL_TEXTURE0);
-        ship.getTexture().bind();
     }
 
     public void loadTexturesRegions() {
