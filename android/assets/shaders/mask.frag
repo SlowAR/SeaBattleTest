@@ -8,21 +8,54 @@ varying vec2 vTexCoord;
 uniform sampler2D u_texture;
 
 uniform vec2 u_sizeAtlasTex;
-uniform vec2 u_texPos;
-uniform vec2 u_texSize;
+uniform vec2 u_textureRegionPos;
+uniform vec2 u_textureRegionSize;
+uniform vec2 u_maskRegionPos;
+uniform vec2 u_maskRegionSize;
+
+uniform vec2 u_screenSize;
+uniform vec2 u_texturePos;
+uniform vec2 u_textureSize;
 uniform vec2 u_maskPos;
 uniform vec2 u_maskSize;
 
 void main() {
-    vec4 texColor0 = texture2D(u_texture, vTexCoord);
-    //vec2 texCoordM = vec2((u_texPos.x - u_maskPos.x)/u_maskSize.x + vTexCoord.s * u_texSize.x/u_maskSize.x, 1.0 - ((u_texPos.y - u_maskPos.y + u_texSize.y)/u_maskSize.y) + vTexCoord.t * u_texSize.y/u_maskSize.y);
-    vec2 texCoordM = vec2(0.1, 0.1);
-    float mask = texture2D(u_texture, texCoordM).a;
-    gl_FragColor = vec4(vec3(vColor * texColor0), mask * texColor0.a);
-//    vec2 startMask = u_maskPos.xy / u_sizeAtlasTex.xy;
-//    vec2 sizeMask = u_maskSize.xy / u_sizeAtlasTex.xy;
-//    vec2 tc = vTexCoord;
-//    vec4 col = vec4(0.0, 1.0, 0.0, 1.0);
-//    col.a = texture2D(u_texture, tc).a;
-//    gl_FragColor = col;
+    vec4 textureColor = texture2D(u_texture, vTexCoord);
+    //half working vec2 maskTexCoord = vec2((u_texturePos.x - u_maskPos.x)/u_maskSize.x + vTexCoord.s * u_textureSize.x/u_maskSize.x, 1.0 - ((u_texturePos.y - u_maskPos.y + u_textureSize.y)/u_maskSize.y) + vTexCoord.t * u_textureSize.y/u_maskSize.y);
+
+//    vec4 maskTexColor = texture2D(u_texture, vec2((u_maskRegionPos.x + u_maskRegionSize.x * 0.5) / u_sizeAtlasTex.x, 1.0 - (u_maskRegionPos.y + u_maskRegionSize.y * 0.5) / u_sizeAtlasTex.y));
+//    vec2 maskTexCoord = vec2((u_texturePos.x - u_maskPos.x)/u_maskSize.x + vTexCoord.s * u_textureSize.x/u_maskSize.x, 1.0 - ((u_texturePos.y - u_maskPos.y + u_textureSize.y)/u_maskSize.y) + vTexCoord.t * u_textureSize.y/u_maskSize.y);
+//    vec4 maskColor = texture2D(u_texture, maskTexCoord);
+//    if (maskColor != maskTexColor) {
+//        textureColor = vec4(vec3(0.0, 1.0, 0.0), textureColor.a);
+//    }
+//    gl_FragColor = textureColor;
+
+    vec2 textureCenterPos = vec2(u_texturePos.x + u_textureSize.x * 0.5, u_texturePos.y + u_textureSize.y * 0.5);
+    vec2 maskCenterPos = vec2(u_maskPos.x + u_maskSize.x * 0.5, u_maskPos.y + u_maskSize.y * 0.5);
+
+    vec2 maskTexCoordCoefficient = vec2((textureCenterPos.x - maskCenterPos.x) / (u_maskSize.x * 0.5 + u_textureSize.x * 0.5), (textureCenterPos.y - maskCenterPos.y) / (u_maskSize.y));
+    vec2 texMaskStartPos = vec2(u_maskRegionPos.x / u_sizeAtlasTex.x, u_maskRegionPos.y / u_sizeAtlasTex.y);
+    vec2 texMaskSize = vec2(u_maskRegionSize.x / u_sizeAtlasTex.x, u_maskRegionSize.y / u_sizeAtlasTex.y);
+
+    vec2 startOffset = vec2(0.0, 0.0);
+    vec2 endLimit = vec2(1.0, 1.0);
+    if (maskTexCoordCoefficient.x > 1.0) {
+        maskTexCoordCoefficient.x = 1.0;
+    } else if (maskTexCoordCoefficient.x < -1.0) {
+        maskTexCoordCoefficient.x = 1.0;
+    } else {
+        if (maskTexCoordCoefficient.x > 0.0) {
+            startOffset = vec2(texMaskSize.x * maskTexCoordCoefficient.x, texMaskSize.y * maskTexCoordCoefficient.y);
+        } else if (maskTexCoordCoefficient.x < 0.0) {
+            endLimit = vec2(texMaskSize.x * (1.0 - maskTexCoordCoefficient.x), texMaskSize.y * (1.0 - maskTexCoordCoefficient.y));
+        }
+    }
+
+    vec2 maskTexCoord = texMaskStartPos + vTexCoord * ((endLimit - startOffset) * texMaskSize);
+    vec4 maskColor = texture2D(u_texture, maskTexCoord);
+    if (maskColor.a > 0.0) {
+        textureColor = vec4(vec3(1.0, 1.0, 1.0), textureColor.a);
+    }
+    gl_FragColor = maskColor;
 }

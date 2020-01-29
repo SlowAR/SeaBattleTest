@@ -56,6 +56,12 @@ public class BoardActor extends Group {
         createShips(gameRules.getShipsAmount(), gameRules);
     }
 
+    public void setMaskActor(MaskActor maskActor) {
+        for (ShipActor shipActor : shipsList) {
+            shipActor.setMaskActor(maskActor);
+        }
+    }
+
     private void createShips(int shipsAmount, GameRules gameRules) {
         for (int i = 0; i < shipsAmount; i++) {
             ShipActor shipActor = new ShipActor(gameAssets, gameRules);

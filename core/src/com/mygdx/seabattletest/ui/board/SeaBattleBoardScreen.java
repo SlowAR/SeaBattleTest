@@ -1,6 +1,5 @@
 package com.mygdx.seabattletest.ui.board;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -27,7 +26,7 @@ public class SeaBattleBoardScreen extends BaseScreen implements SeaBattleBoardCo
 
     private BoardActor boardActor;
     private TextButton autoButton;
-    private Actor maskActor;
+    private MaskActor maskActor;
 
     public SeaBattleBoardScreen(GameAssets gameAssets, ScreenListener screenListener) {
         super(gameAssets, screenListener);
@@ -55,6 +54,7 @@ public class SeaBattleBoardScreen extends BaseScreen implements SeaBattleBoardCo
     public void onBoardCreated(GameRules gameRules) {
         boardActor.setPosition(Constants.BOARD_CELL_WIDTH * 2, Constants.BOARD_CELL_HEIGHT);
         boardActor.init(skin, gameRules);
+        boardActor.setMaskActor(maskActor);
         setupUi();
     }
 
